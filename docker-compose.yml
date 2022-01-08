@@ -1,0 +1,27 @@
+version: "3.7"
+volumes:
+  postgres-data:
+
+services:
+  server:
+    build:
+      context: .
+    container_name: kakaku-scraper
+    volumes:
+      - ./app:/app
+    tty: true
+    depends_on:
+      - postgresql
+
+  postgresql:
+    image: postgres:12
+    container_name: kakaku-scraper-db
+    environment:
+      - POSTGRES_DB=kakaku
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_HOST="postgresql://root:root@postgresql:5432/reshub?schema=public"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
