@@ -21,6 +21,8 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
       - POSTGRES_HOST="postgresql://root:root@postgresql:5432/reshub?schema=public"
+      - TZ=Asia/Tokyo
+      - PGTZ=Asia/Tokyo
     ports:
       - 5432:5432
     volumes:
